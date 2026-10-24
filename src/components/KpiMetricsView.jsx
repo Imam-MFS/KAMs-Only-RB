@@ -2,27 +2,16 @@ import React, { useState, useMemo } from 'react';
 import {
   Target,
   Trophy,
-  TrendingUp,
-  TrendingDown,
   UserCheck,
   User,
-  Building,
-  Store,
-  Filter,
   Search,
   Sliders,
   Download,
   CheckCircle2,
-  AlertTriangle,
-  AlertOctagon,
-  Clock,
-  Sparkles,
-  Edit3,
   RotateCcw,
-  Layers,
-  ChevronRight,
+  Clock,
   ShieldCheck,
-  BarChart3
+  Edit3
 } from 'lucide-react';
 import { formatBDT, formatNumber } from '../utils/formatters';
 import {
@@ -36,7 +25,7 @@ export default function KpiMetricsView({ allMerchants = [], isDark = true }) {
   // 1. Timeframe Selection for KPI Evaluation
   const [selectedTimeframe, setSelectedTimeframe] = useState('Live MTD');
 
-  // 2. Hierarchy Scope: 'rbKam' (Officers) | 'rbKamLead' (Regional Leads) | 'kam' (KAM)
+  // 2. Hierarchy Scope: 'rbKam' (Officers) | 'rbKamLead' (Regional Leads)
   const [roleScope, setRoleScope] = useState('rbKam');
 
   // 3. Search and Filters
@@ -158,9 +147,7 @@ export default function KpiMetricsView({ allMerchants = [], isDark = true }) {
       const designation =
         roleScope === 'rbKam'
           ? 'RB KAM (Officer)'
-          : roleScope === 'rbKamLead'
-          ? 'RB KAM Lead'
-          : 'Key Account Manager';
+          : 'RB KAM Lead';
 
       // Deterministic Corporate Employee ID (e.g., BK-72019)
       let hash = 0;
@@ -693,17 +680,6 @@ export default function KpiMetricsView({ allMerchants = [], isDark = true }) {
             >
               <UserCheck className="w-3.5 h-3.5" />
               <span>RB KAM Leads</span>
-            </button>
-            <button
-              onClick={() => setRoleScope('kam')}
-              className={`px-3 py-1.5 rounded-lg transition-all font-bold cursor-pointer flex items-center space-x-1.5 ${
-                roleScope === 'kam'
-                  ? 'bg-gradient-to-r from-[#E2136E] to-[#FF2E88] text-white shadow-sm'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              <Store className="w-3.5 h-3.5" />
-              <span>Key Account Mgrs</span>
             </button>
           </div>
 
