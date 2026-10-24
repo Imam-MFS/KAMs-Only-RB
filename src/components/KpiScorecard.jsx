@@ -5,10 +5,7 @@ import {
   Store,
   AlertOctagon,
   Receipt,
-  TrendingUp,
   ArrowUpRight,
-  ArrowDownRight,
-  ShieldCheck,
   Zap
 } from 'lucide-react';
 import { formatBDT, formatNumber } from '../utils/formatters';
@@ -26,7 +23,7 @@ export default function KpiScorecard({
   const redRate = totalOutlets > 0 ? (redCount / totalOutlets) * 100 : 0;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-4">
       
       {/* 1. Total Volume (PA) */}
       <div className="kpi-card rounded-2xl p-4 sm:p-5 relative group border border-white/10 dark:border-white/[0.08]">

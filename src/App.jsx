@@ -89,6 +89,7 @@ export default function App() {
 
   // 1.2 Sidebar Navigation State: 'dashboard' | 'comparison' | 'settings'
   const [currentView, setCurrentView] = useState('dashboard');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // 2. Theme State (default dark obsidian)
   const [isDark, setIsDark] = useState(() => {
@@ -696,11 +697,11 @@ export default function App() {
   };
 
   if (!isAuthenticated) {
-    return <AuthGate onAuthenticated={() => setIsAuthenticated(true)} isDark={isDark} />;
+    return <AuthGate onAuthenticated={() => setIsAuthenticated(true)} />;
   }
 
   return (
-    <div className="relative min-h-screen flex bg-[#F8FAFC] dark:bg-[#060810] text-slate-800 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden selection:bg-[#E2136E] selection:text-white">
+    <div className="relative min-h-screen flex flex-col lg:flex-row bg-[#F8FAFC] dark:bg-[#060810] text-slate-800 dark:text-slate-100 transition-colors duration-300 overflow-x-hidden selection:bg-[#E2136E] selection:text-white">
       
       {/* Aurora Ambient Mesh Background Glows */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
@@ -710,18 +711,23 @@ export default function App() {
         <div className="absolute -bottom-32 right-1/3 w-[650px] h-[650px] rounded-full mesh-glow-4 blur-[140px] dark:opacity-25 opacity-15" />
       </div>
 
-      {/* 0. Left Floating Luxury Sidebar */}
+      {/* 0. Left Floating Luxury Sidebar (Responsive Desktop & Mobile Drawer) */}
       <Sidebar
         activeNav={currentView}
-        onSelectNav={setCurrentView}
+        onSelectNav={(nav) => {
+          setCurrentView(nav);
+          setIsMobileMenuOpen(false);
+        }}
         onLockPortal={handleLockPortal}
         merchantCount={allMerchants.length}
         isDark={isDark}
         onToggleTheme={() => setIsDark((prev) => !prev)}
+        isMobileOpen={isMobileMenuOpen}
+        onCloseMobile={() => setIsMobileMenuOpen(false)}
       />
 
       {/* Main Flow Right Container */}
-      <div className="relative z-10 flex flex-col flex-1 min-w-0 min-h-screen">
+      <div className="relative z-10 flex flex-col flex-1 min-w-0 min-h-screen w-full overflow-x-hidden">
         {/* 1. SaaS Glassmorphism Header */}
         <Header
           isDark={isDark}
@@ -734,10 +740,11 @@ export default function App() {
           activeTab={activeTab}
           onSelectTab={scrollToSection}
           onLockPortal={handleLockPortal}
+          onToggleMobileMenu={() => setIsMobileMenuOpen((prev) => !prev)}
         />
 
         {/* 2. Main SaaS Dashboard Workspace */}
-        <main className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 py-5 flex-1 w-full space-y-6">
+        <main className="max-w-[1720px] mx-auto px-3 sm:px-6 lg:px-8 py-3.5 sm:py-5 flex-1 w-full space-y-4 sm:space-y-6">
           {currentView === 'comparison' ? (
             <ComparisonView allMerchants={allMerchants} isDark={isDark} />
           ) : currentView === 'kpi' ? (

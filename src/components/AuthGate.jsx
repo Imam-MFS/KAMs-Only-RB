@@ -7,13 +7,12 @@ import {
   EyeOff,
   ShieldCheck,
   AlertCircle,
-  ArrowRight,
-  Sparkles
+  ArrowRight
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import bkashLogo from '../assets/logo.png';
 
-export default function AuthGate({ onAuthenticated, isDark }) {
+export default function AuthGate({ onAuthenticated }) {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(false);
@@ -60,7 +59,7 @@ export default function AuthGate({ onAuthenticated, isDark }) {
         
         {/* Glassmorphic Security Card */}
         <div
-          className={`glass-panel-elevated rounded-3xl p-8 sm:p-10 border border-white/20 dark:border-white/10 shadow-2xl relative overflow-hidden transition-all duration-300 ${
+          className={`glass-panel-elevated rounded-3xl p-6 sm:p-10 border border-white/20 dark:border-white/10 shadow-2xl relative overflow-hidden transition-all duration-300 ${
             isShaking ? 'animate-shake' : ''
           }`}
         >

@@ -1,19 +1,5 @@
 import React, { useState } from 'react';
-import {
-  X,
-  Copy,
-  Check,
-  Building2,
-  Calendar,
-  AlertCircle,
-  TrendingUp,
-  MapPin,
-  Tag,
-  ShieldCheck,
-  UserCheck,
-  Activity,
-  Layers
-} from 'lucide-react';
+import { X, Copy, Check, AlertCircle } from 'lucide-react';
 import { Line } from 'react-chartjs-2';
 import { formatBDT, formatNumber } from '../utils/formatters';
 import { HISTORICAL_MONTHS } from '../data/timeline';
@@ -107,7 +93,7 @@ export default function MerchantDrawer({
       />
 
       {/* Slide-over Drawer Glass Panel */}
-      <div className="relative w-full max-w-lg glass-panel-elevated z-50 p-6 flex flex-col justify-between overflow-y-auto transform transition-transform duration-300 ease-out shadow-2xl border-l border-white/10 dark:border-white/[0.12]">
+      <div className="relative w-full sm:max-w-lg glass-panel-elevated z-50 p-4 sm:p-6 flex flex-col justify-between overflow-y-auto transform transition-transform duration-300 ease-out shadow-2xl border-l border-white/10 dark:border-white/[0.12]">
         <div className="space-y-5">
           
           {/* Header */}

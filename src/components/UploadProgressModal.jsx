@@ -2,12 +2,10 @@ import React from 'react';
 import {
   FileSpreadsheet,
   CheckCircle2,
-  Sparkles,
   Layers,
   Database,
   Cpu,
   BarChart3,
-  TrendingUp,
   Loader2
 } from 'lucide-react';
 import bkashLogo from '../assets/logo.png';
@@ -47,14 +45,14 @@ export default function UploadProgressModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-[#040711]/80 backdrop-blur-xl transition-all duration-300">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-[#040711]/80 backdrop-blur-xl transition-all duration-300 overflow-y-auto">
       
       {/* Aurora Ambient Glow in Modal */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-tr from-[#E2136E]/30 via-purple-600/25 to-sky-500/20 rounded-full blur-[100px] animate-pulse" />
       </div>
 
-      <div className="relative w-full max-w-lg glass-panel-elevated rounded-3xl p-7 sm:p-9 border border-white/20 dark:border-white/10 shadow-2xl space-y-7 overflow-hidden">
+      <div className="relative w-full max-w-lg glass-panel-elevated rounded-3xl p-5 sm:p-8 border border-white/20 dark:border-white/10 shadow-2xl space-y-5 sm:space-y-6 overflow-hidden my-auto max-h-[94vh] overflow-y-auto">
         
         {/* Animated Scanning Beam Top Highlight */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#E2136E] to-transparent animate-pulse" />
