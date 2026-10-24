@@ -7,15 +7,12 @@ import {
   Moon,
   Sun,
   Database,
-  Building,
   ChevronLeft,
   ChevronRight,
-  ShieldCheck,
-  TrendingUp,
-  Sparkles,
   Target
 } from 'lucide-react';
 import bkashLogo from '../assets/logo.png';
+import SnakeGame from './SnakeGame';
 
 export default function Sidebar({
   activeNav = 'dashboard',
@@ -56,12 +53,12 @@ export default function Sidebar({
 
   return (
     <aside
-      className={`relative z-40 flex flex-col justify-between transition-all duration-300 ease-in-out border-r border-slate-200/60 dark:border-white/[0.08] glass-panel-elevated select-none shrink-0 ${
+      className={`relative z-40 flex flex-col justify-between transition-all duration-300 ease-in-out border-r border-slate-200/60 dark:border-white/[0.08] glass-panel-elevated select-none shrink-0 sticky top-0 h-screen overflow-hidden ${
         collapsed ? 'w-[78px]' : 'w-[260px]'
       }`}
     >
-      {/* Top Header & Brand */}
-      <div className="p-4 space-y-6">
+      {/* Top Header & Brand & Scrollable Navigation */}
+      <div className="flex-1 overflow-y-auto overflow-x-hidden p-3.5 space-y-4">
         
         {/* Brand Lockup */}
         <div className="flex items-center justify-between">
@@ -140,10 +137,13 @@ export default function Sidebar({
           })}
         </nav>
 
+        {/* Snake Game in Left Section */}
+        <SnakeGame collapsed={collapsed} />
+
       </div>
 
       {/* Bottom Footer Controls */}
-      <div className="p-4 space-y-3 border-t border-slate-200/60 dark:border-white/[0.08]">
+      <div className="p-3.5 space-y-2.5 border-t border-slate-200/60 dark:border-white/[0.08] shrink-0 bg-inherit">
         
         {/* Active Dataset Status Widget */}
         {!collapsed && (
