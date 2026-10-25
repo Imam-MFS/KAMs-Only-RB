@@ -55,18 +55,33 @@ export default function ExcelUploadModal({
             return '';
           };
 
+          const parseExcelDate = (val) => {
+            if (!val) return '2024-01-01';
+            if (typeof val === 'number') {
+              const d = new Date((val - (25567 + 2)) * 86400 * 1000);
+              if (!isNaN(d.getTime())) return d.toISOString().slice(0, 10);
+            }
+            const str = String(val).trim();
+            const d = new Date(str);
+            if (!isNaN(d.getTime())) return d.toISOString().slice(0, 10);
+            return str.slice(0, 10);
+          };
+
           const wallet = findCol(['wallet no', 'wallet', 'wallet_no', 'account no', 'merchant wallet']);
           const brand = findCol(['brand name', 'brand', 'brand_name']);
           const merchant = findCol(['merchant name', 'outlet name', 'branch name', 'brand name']);
           const district = normalizeDistrict(findCol(['present district', 'district', 'division', 'region']));
           const thana = findCol(['present thana', 'thana', 'area', 'sub-district']);
+          const address = findCol(['present address', 'address', 'outlet address', 'merchant address', 'location', 'shop address', 'present_address']);
+          const activeMerchantDV = findCol(['active merchant(dv)', 'active merchant (dv)', 'active merchant', 'active_merchant(dv)', 'active_merchant_dv', 'active merchant dv', 'active status', 'merchant status', 'active/non-active', 'status(dv)']);
           const category = findCol(['category', 'commercial category', 'industry']);
           const subCategory = findCol(['sub category', 'sub-category', 'subcategory', 'sub unit']);
-          const kam = findCol(['key account manager', 'kam', 'kam name', 'account manager']);
+          const kam = findCol(['key account manager', 'key account mgr', 'kam', 'kam name', 'account manager', 'onboarded by']);
           const catLead = findCol(['category lead', 'cat lead', 'lead name', 'vertical head']);
           const rbKam = findCol(['rb kam', 'rb_kam', 'regional kam', 'field kam']);
           const rbKamLead = findCol(['rb kam lead', 'rb lead', 'rb_kam_lead', 'regional lead']);
-          const regDate = findCol(['registration date', 'reg date', 'reg_date', 'date of registration']) || '2024-01-01';
+          const rawRegDate = findCol(['registration date', 'reg date', 'reg_date', 'date of registration', 'registered date', 'onboarding date']) || '2024-01-01';
+          const regDate = parseExcelDate(rawRegDate);
 
           const mtdPC = parseFloat(findCol(['mtd pc', 'pc', 'payment count', 'trx count', 'total pc'])) || 0;
           const mtdPA = parseFloat(findCol(['mtd pa', 'pa', 'payment amount', 'gross volume', 'total pa'])) || 0;
@@ -115,6 +130,8 @@ export default function ExcelUploadModal({
             merchant: String(merchant || brand || 'Branch'),
             district: district || 'Dhaka',
             thana: String(thana || 'Central'),
+            address: String(address || `${thana || 'Central'}, ${district || 'Dhaka'}`),
+            activeMerchantDV: String(activeMerchantDV || (mtdPC > 0 ? 'Active' : 'Non-Active')),
             category: String(category || 'General'),
             subCategory: String(subCategory || 'Retail'),
             kam: String(kam || 'Key Accounts Team'),

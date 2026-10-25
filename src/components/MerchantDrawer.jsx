@@ -293,9 +293,15 @@ export default function MerchantDrawer({
               </span>
             </div>
             <div className="flex justify-between py-1 border-b border-slate-200/50 dark:border-white/[0.06]">
-              <span className="text-slate-500 dark:text-slate-400">Location</span>
-              <span className="font-bold text-slate-800 dark:text-slate-200">
-                {merchant.thana}, {merchant.district}
+              <span className="text-slate-500 dark:text-slate-400">Active Status (DV)</span>
+              <span className={`font-bold ${merchant.activeMerchantDV === 'Active' || (!merchant.activeMerchantDV && (merchant.mtdPC > 0 || merchant.mtdPA > 0)) ? 'text-emerald-500' : 'text-rose-500'}`}>
+                {merchant.activeMerchantDV || ((merchant.mtdPC > 0 || merchant.mtdPA > 0) ? 'Active' : 'Non-Active')}
+              </span>
+            </div>
+            <div className="flex justify-between py-1 border-b border-slate-200/50 dark:border-white/[0.06]">
+              <span className="text-slate-500 dark:text-slate-400">Address / Location</span>
+              <span className="font-bold text-slate-800 dark:text-slate-200 text-right max-w-[200px] truncate" title={merchant.address || `${merchant.thana}, ${merchant.district}`}>
+                {merchant.address || `${merchant.thana}, ${merchant.district}`}
               </span>
             </div>
             <div className="flex justify-between py-1 border-b border-slate-200/50 dark:border-white/[0.06]">

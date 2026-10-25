@@ -10,6 +10,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Target,
+  UserPlus,
   X
 } from 'lucide-react';
 import bkashLogo from '../assets/logo.png';
@@ -43,6 +44,12 @@ export default function Sidebar({
       id: 'kpi',
       label: 'KPI Target & Metrics',
       icon: Target,
+      badge: null
+    },
+    {
+      id: 'acquisition',
+      label: 'Acquisition',
+      icon: UserPlus,
       badge: null
     },
     {
