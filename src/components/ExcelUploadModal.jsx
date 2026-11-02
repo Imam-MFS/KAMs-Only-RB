@@ -8,6 +8,7 @@ import {
 import * as XLSX from 'xlsx';
 import confetti from 'canvas-confetti';
 import { normalizeDistrict } from '../utils/formatters';
+import { clampWorksheetRange } from '../utils/excel';
 import { HISTORICAL_MONTHS } from '../data/timeline';
 
 export default function ExcelUploadModal({
@@ -36,6 +37,7 @@ export default function ExcelUploadModal({
         const workbook = XLSX.read(data, { type: 'array' });
         const firstSheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[firstSheetName];
+        clampWorksheetRange(worksheet);
         const rawRows = XLSX.utils.sheet_to_json(worksheet, { defval: '' });
 
         if (!rawRows || rawRows.length === 0) {

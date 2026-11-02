@@ -32,6 +32,7 @@ import Toast from './components/Toast';
 
 import { getMerchantPeriodMetrics, HISTORICAL_MONTHS } from './data/timeline';
 import { normalizeDistrict } from './utils/formatters';
+import { clampWorksheetRange } from './utils/excel';
 import bkashLogo from './assets/logo.png';
 
 export default function App() {
@@ -554,6 +555,7 @@ export default function App() {
         const workbook = XLSX.read(data, { type: 'array' });
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
+        clampWorksheetRange(worksheet);
         const rawRows = XLSX.utils.sheet_to_json(worksheet, { defval: '' });
 
         if (!rawRows || rawRows.length === 0) {
